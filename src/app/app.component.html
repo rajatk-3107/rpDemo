@@ -5,6 +5,13 @@
         <input matInput placeholder="Enter recharge amount." formControlName="amount">
       </mat-form-field>
       <button mat-raised-button color="primary" [disabled]="paymentForm.invalid" (click)="getDeductableAmount()">Pay</button>
+
+
+      <br>
+      <br>
+      <br>
+
+      <button mat-raised-button (click)="openRazorpayBox()"> Test </button>
     </form>
   </div>
 </div>
