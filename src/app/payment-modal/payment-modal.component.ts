@@ -16,6 +16,7 @@ export class PaymentModalComponent implements OnInit {
   ) {
     console.log(this.data)
     this.paymentStatus = this.data.paymentStatus;
+    console.log(this.paymentStatus)
   }
 
   ngOnInit() {
