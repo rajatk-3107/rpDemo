@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: flex; height: 100vh;\">\n  <div style=\"margin:auto;\">\n    <form [formGroup]=\"paymentForm\">\n      <mat-form-field>\n        <input matInput placeholder=\"Enter recharge amount.\" formControlName=\"amount\">\n      </mat-form-field>\n      <button mat-raised-button color=\"primary\">Pay</button>\n    </form>\n  </div>\n</div>\n"
+module.exports = "<div style=\"display: flex; height: 100vh;\">\n  <div style=\"margin:auto;\">\n    <form [formGroup]=\"paymentForm\">\n      <mat-form-field>\n        <input matInput placeholder=\"Enter recharge amount.\" formControlName=\"amount\">\n      </mat-form-field>\n      <button mat-raised-button color=\"primary\" [disabled]=\"paymentForm.invalid\" (click)=\"getDeductableAmount()\">Pay</button>\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -59,6 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _payment_modal_payment_modal_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./payment-modal/payment-modal.component */ "./src/app/payment-modal/payment-modal.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,6 +69,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -87,6 +89,15 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.getDeductableAmount = function () {
         console.log('Value', this.paymentForm.value);
+        this.openModal();
+    };
+    AppComponent.prototype.openModal = function () {
+        this.dialog.open(_payment_modal_payment_modal_component__WEBPACK_IMPORTED_MODULE_4__["PaymentModalComponent"], {
+            width: '60vw',
+            data: {
+                paymentStatus: 'success'
+            }
+        });
     };
     AppComponent.prototype.ngOnInit = function () {
         this.createForm();
@@ -159,9 +170,11 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBarModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatInputModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatButtonModule"]
             ],
-            providers: [_payment_modal_payment_modal_component__WEBPACK_IMPORTED_MODULE_4__["PaymentModalComponent"]],
+            providers: [],
+            entryComponents: [_payment_modal_payment_modal_component__WEBPACK_IMPORTED_MODULE_4__["PaymentModalComponent"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
@@ -190,7 +203,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  payment-modal works!\n</p>\n"
+module.exports = "<div [ngSwitch]=\"paymentStatus\">\n  <ng-template *ngSwitchCase=\"success\">\n    <div>\n      Payment Successful\n    </div>\n  </ng-template>\n  <ng-template *ngSwitchCase=\"failed\">\n    <div>\n      Payment Failed\n    </div>\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -205,6 +218,7 @@ module.exports = "<p>\n  payment-modal works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentModalComponent", function() { return PaymentModalComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -214,11 +228,22 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
 
 var PaymentModalComponent = /** @class */ (function () {
-    function PaymentModalComponent() {
+    function PaymentModalComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        console.log(this.data);
+        this.paymentStatus = this.data.paymentStatus;
     }
     PaymentModalComponent.prototype.ngOnInit = function () {
+    };
+    PaymentModalComponent.prototype.closeDialog = function () {
+        this.dialogRef.close();
     };
     PaymentModalComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -226,7 +251,8 @@ var PaymentModalComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./payment-modal.component.html */ "./src/app/payment-modal/payment-modal.component.html"),
             styles: [__webpack_require__(/*! ./payment-modal.component.css */ "./src/app/payment-modal/payment-modal.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object])
     ], PaymentModalComponent);
     return PaymentModalComponent;
 }());
@@ -296,7 +322,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/pc-01/Practice/razorpay-angular-integration/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/pc-01/Practice/rpDemo/src/main.ts */"./src/main.ts");
 
 
 /***/ })

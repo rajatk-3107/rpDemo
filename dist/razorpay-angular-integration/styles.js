@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/pc-01/Practice/razorpay-angular-integration/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
-module.exports = __webpack_require__(/*! /home/pc-01/Practice/razorpay-angular-integration/src/styles.css */"./src/styles.css");
+__webpack_require__(/*! /home/pc-01/Practice/rpDemo/node_modules/@angular/material/prebuilt-themes/indigo-pink.css */"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css");
+module.exports = __webpack_require__(/*! /home/pc-01/Practice/rpDemo/src/styles.css */"./src/styles.css");
 
 
 /***/ })
