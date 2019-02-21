@@ -25,7 +25,7 @@ module.exports = (req, res) => {
         }
         let totalAmount = amount + includingGst;
         console.log(includingGst, totalAmount, amount)
-        instance.orders.create({ amount: totalAmount, currency: 'INR', receipt: 'f005', payment_capture: true, notes: { note1: "Test example" } }).then(d => {
+        instance.orders.create({ amount: totalAmount, currency: 'INR', receipt: 'f008', payment_capture: true, notes: { note1: "Test example" } }).then(d => {
             console.log(d)
             res.json({
                 success: true,
