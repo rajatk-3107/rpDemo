@@ -1,0 +1,10 @@
+<div style="display: flex; height: 100vh;">
+  <div style="margin:auto;">
+    <form [formGroup]="paymentForm">
+      <mat-form-field>
+        <input matInput placeholder="Enter recharge amount." formControlName="amount">
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="paymentForm.invalid" (click)="getDeductableAmount()">Pay</button>
+    </form>
+  </div>
+</div>

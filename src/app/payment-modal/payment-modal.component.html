@@ -1,0 +1,12 @@
+<div [ngSwitch]="paymentStatus">
+  <ng-template *ngSwitchCase="success">
+    <div>
+      Payment Successful
+    </div>
+  </ng-template>
+  <ng-template *ngSwitchCase="failed">
+    <div>
+      Payment Failed
+    </div>
+  </ng-template>
+</div>
