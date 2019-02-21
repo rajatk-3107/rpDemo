@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 
 import { get } from 'scriptjs';
+
+//global variable
 declare var Razorpay: any;
 
 @Component({
@@ -16,7 +18,6 @@ export class AppComponent implements OnInit {
   title = 'razorpay-angular-integration';
 
   paymentForm: FormGroup;
-
 
   constructor(
     private snackbar: MatSnackBar,
@@ -35,28 +36,28 @@ export class AppComponent implements OnInit {
     let options = {
       "key": "rzp_test_ci1GxgtQgJTbfh",
       "amount": "2000", // 2000 paise = INR 20
-      "name": "Merchant Name",
-      "description": "Purchase Description",
+      "name": "ShippiGo",
+      "description": "Wallet Recharge",
       "image": "https://angular.io/assets/images/support/angular-404.svg",
       "handler": function (response) {
+        console.log('rzp res', response)
         alert(response.razorpay_payment_id);
       },
       "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "test@test.com"
+        "name": "Ankur Atri",
+        "email": "ankur@zenways.io"
       },
       "notes": {
-        "address": "Hello World"
+        "address": "Gurgaon"
       },
       "theme": {
-        "color": "#F37254"
+        "color": "#4dd0e1"
       },
       "order_id": ''
     };
     var rzp = new Razorpay(options);
     rzp.open();
   }
-
 
   getDeductableAmount() {
     console.log('Value', this.paymentForm.value)
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit {
     this.http.post('/api/generateId', this.paymentForm.value).subscribe(
       (res: any) => {
         if (res.success) {
-          console.log(res)
+          console.log('res', res)
         } else {
           console.log(res.msg)
         }
