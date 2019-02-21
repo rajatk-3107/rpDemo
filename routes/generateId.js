@@ -5,7 +5,7 @@ var instance = new Razorpay({
     key_secret: '8DKibopKlFJVSxFD0ioE8DzE'
 })
 
-var generateId = () => {
+var generateId = (sgid) => {
 
 }
 
