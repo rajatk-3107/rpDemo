@@ -35,10 +35,10 @@ export class AppComponent implements OnInit {
       "color": "#4dd0e1"
     },
     "modal": {
-      "ondismiss": function () {
-        console.log('Modal Closed')
-      }
-    }
+      "ondismiss": () => this.handleFailure()
+
+    },
+    "handler": (res) => this.handleResponse(res)
   };
 
   constructor(
@@ -53,8 +53,13 @@ export class AppComponent implements OnInit {
     })
   }
 
+  handleFailure() {
+    this.openModal('failed')
+  }
+
   handleResponse(res) {
     console.log('Res from RZP', res)
+    this.openModal('success')
   }
 
   openRazorpayBox() {
@@ -69,7 +74,6 @@ export class AppComponent implements OnInit {
           console.log('res', res)
           this.options['amount'] = res.totalAmount;
           this.options['order_id'] = res.razorPayId
-          this.options['handler'] = (res) => this.handleResponse(res)
           this.openRazorpayBox()
         } else {
           console.log(res.msg)
@@ -79,11 +83,11 @@ export class AppComponent implements OnInit {
       })
   }
 
-  openModal() {
+  openModal(status) {
     this.dialog.open(PaymentModalComponent, {
       width: '60vw',
       data: {
-        paymentStatus: 'success'
+        paymentStatus: status
       }
     })
   }
