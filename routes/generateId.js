@@ -28,7 +28,7 @@ module.exports = (req, res) => {
         instance.orders.create({
             amount: totalAmount,
             currency: 'INR',
-            receipt: 'f1145',
+            receipt: 'f1148',
             payment_capture: false,
             notes: {
                 note1: "Test example"

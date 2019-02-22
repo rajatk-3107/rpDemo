@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-    private dialog: MatDialog,
     private http: HttpClient,
     private fb: FormBuilder
   ) { }
