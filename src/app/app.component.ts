@@ -33,13 +33,13 @@ export class AppComponent implements OnInit {
     },
     "theme": {
       "color": "#4dd0e1"
+    },
+    "modal": {
+      "ondismiss": function () {
+        console.log('Modal Closed')
+      }
     }
   };
-
-  printThis(res) {
-    //api call
-    console.log(res)
-  }
 
   constructor(
     private dialog: MatDialog,
@@ -54,20 +54,10 @@ export class AppComponent implements OnInit {
   }
 
   handleResponse(res) {
-    console.log('Handled response', res)
-  }
-
-  handleModal() {
-    console.log('Modal Closed')
+    console.log('Res from RZP', res)
   }
 
   openRazorpayBox() {
-    // "modal": {
-    //   "ondismiss": function () {
-    //     alert('Payment Failed')
-    //   }
-    // },
-
     var rzp = new Razorpay(this.options);
     rzp.open();
   }
@@ -79,7 +69,6 @@ export class AppComponent implements OnInit {
           console.log('res', res)
           this.options['amount'] = res.totalAmount;
           this.options['order_id'] = res.razorPayId
-          this.options['modal'] = () => this.handleModal()
           this.options['handler'] = (res) => this.handleResponse(res)
           this.openRazorpayBox()
         } else {
