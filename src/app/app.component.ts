@@ -15,7 +15,7 @@ declare var Razorpay: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
   title = 'razorpay-angular-integration';
 
   paymentForm: FormGroup;
@@ -24,8 +24,13 @@ export class AppComponent implements OnInit {
     "name": "Shippigo",
     "description": "Wallet Recharge",
     "image": "https://i.pinimg.com/originals/ab/a3/ca/aba3ca3f87c2000431fb3d1b61324131.jpg",
-    "handler": function (res) {
-      console.log('rzp res', res)
+    "handler": function (response) {
+      alert(`Payment Successful, Payment ID: ${response.razorpay_payment_id}`);
+    },
+    "modal": {
+      "ondismiss": function () {
+        alert('Payment Failed')
+      }
     },
     "prefill": {
       "name": "Ankur Atri",
@@ -38,6 +43,11 @@ export class AppComponent implements OnInit {
       "color": "#4dd0e1"
     }
   };
+
+  printThis(res) {
+    //api call
+    console.log(res)
+  }
 
   constructor(
     private dialog: MatDialog,
