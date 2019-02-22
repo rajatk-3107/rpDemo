@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 
 import { get } from 'scriptjs';
 
@@ -54,12 +53,11 @@ export class AppComponent implements OnInit {
   }
 
   handleFailure() {
-    this.openModal('failed')
+    alert('payment failed')
   }
 
   handleResponse(res) {
-    console.log('Res from RZP', res)
-    this.openModal('success')
+    alert(`success, res from rzp: ${res}`)
   }
 
   openRazorpayBox() {
@@ -81,15 +79,6 @@ export class AppComponent implements OnInit {
       }, () => {
         console.log('Something went wrong.')
       })
-  }
-
-  openModal(status) {
-    this.dialog.open(PaymentModalComponent, {
-      width: '60vw',
-      data: {
-        paymentStatus: status
-      }
-    })
   }
 
   ngOnInit() {
