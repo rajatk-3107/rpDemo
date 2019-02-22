@@ -15,6 +15,7 @@ declare var Razorpay: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
   title = 'razorpay-angular-integration';
 
   paymentForm: FormGroup;
