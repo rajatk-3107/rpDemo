@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
   paymentForm: FormGroup;
   options = {
     "key": "rzp_test_ci1GxgtQgJTbfh",
-    "name": "ShippiGo",
+    "name": "Shippigo",
     "description": "Wallet Recharge",
-    "image": "https://angular.io/assets/images/support/angular-404.svg",
-    "handler": function (response) {
-      console.log('rzp res', response)
+    "image": "https://i.pinimg.com/originals/ab/a3/ca/aba3ca3f87c2000431fb3d1b61324131.jpg",
+    "handler": function (res) {
+      console.log('rzp res', res)
     },
     "prefill": {
       "name": "Ankur Atri",
