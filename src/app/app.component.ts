@@ -24,14 +24,6 @@ export class AppComponent implements OnInit {
     "name": "Shippigo",
     "description": "Wallet Recharge",
     "image": "https://i.pinimg.com/originals/ab/a3/ca/aba3ca3f87c2000431fb3d1b61324131.jpg",
-    "handler": function (response) {
-      alert(`Payment Successful, Payment ID: ${response.razorpay_payment_id}`);
-    },
-    "modal": {
-      "ondismiss": function () {
-        alert('Payment Failed')
-      }
-    },
     "prefill": {
       "name": "Ankur Atri",
       "email": "ankur@zenways.io"
@@ -61,7 +53,21 @@ export class AppComponent implements OnInit {
     })
   }
 
+  handleResponse(res) {
+    console.log('Handled response', res)
+  }
+
+  handleModal() {
+    console.log('Modal Closed')
+  }
+
   openRazorpayBox() {
+    // "modal": {
+    //   "ondismiss": function () {
+    //     alert('Payment Failed')
+    //   }
+    // },
+
     var rzp = new Razorpay(this.options);
     rzp.open();
   }
@@ -73,6 +79,8 @@ export class AppComponent implements OnInit {
           console.log('res', res)
           this.options['amount'] = res.totalAmount;
           this.options['order_id'] = res.razorPayId
+          this.options['modal'] = () => this.handleModal()
+          this.options['handler'] = (res) => this.handleResponse(res)
           this.openRazorpayBox()
         } else {
           console.log(res.msg)
